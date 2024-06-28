@@ -7,23 +7,14 @@ const authMiddleware = async (req, res, next) => {
         if (!token) {
             throw new Error('Please provide a valid token.');
         }
-        console.log("Token:", token);
-
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        console.log("Decoded Token:", decoded);
-
         // Debugging: Find the user document by ID first
         const userById = await userModel.findById(decoded._id);
-        console.log("User by ID:", userById);
-
         if (!userById) {
             throw new Error('User not found.');
         }
-
         // Check if the token exists in the user's tokens array
         const user = await userModel.findOne({ _id: decoded._id, 'tokens.token': token });
-        console.log("User by Token:", user);
-
         if (!user) {
             throw new Error('Token not found in user tokens.');
         }

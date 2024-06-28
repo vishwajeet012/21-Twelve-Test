@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema({
             required: true,
         },
     }],
+    borrowedBooks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Book' }],
 });
 
 // Method to generate auth token

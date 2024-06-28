@@ -56,6 +56,7 @@ const updateBook = async (req, res) => {
 
 // Delete a book (Admin only)
 const deleteBook = async (req, res) => {
+            const del = "book deleted"
     try {
         const book = await bookModel.findByIdAndDelete(req.params.id);
 
@@ -63,7 +64,7 @@ const deleteBook = async (req, res) => {
             return res.status(404).send({ error: 'Book not found' });
         }
 
-        res.send(book);
+        res.send(del);
     } catch (e) {
         res.status(500).send({ error: e.message });
     }
